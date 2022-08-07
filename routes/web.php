@@ -44,6 +44,7 @@ Route::get('/pesan', function () {
     $pesan = Pesan::all();
     return view('pesan', compact("pesan"));
 })->middleware("auth");
+
 Route::post('/send', function (Request $request) {
     Pesan::create([
         "isi" => $request->isi

@@ -33,17 +33,15 @@
           <div class="row">
             @foreach ($pesan as $ps)
             <div class="col-md-4 mb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div class="card-title p-0 m-0">
-                    <div class="d-flex align-items-center">
-                      <i class="fa-solid fa-message"></i>
-                      <div class="mx-2">
-                        <p class="my-0"><strong>Receive on</strong></p>
-                        <p class="my-0" style="font-size: 0.8em">
-                          {{ $ps->created_at->isoFormat('dddd, D MMMM Y H:m:s') }}
-                        </p>
-                      </div>
+              <div class="card" id="html-content-holder-{{ $ps->id }}">
+                <div class="card-title p-0 mx-3 mb-0 mt-3">
+                  <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-message"></i>
+                    <div class="mx-2">
+                      <p class="my-0"><strong>Receive on</strong></p>
+                      <p class="my-0" style="font-size: 0.8em">
+                        {{ $ps->created_at->isoFormat('dddd, D MMMM Y H:m:s') }}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -55,6 +53,8 @@
             </div>
             @endforeach
 
+          <div id="previewImg" class="d-none"></div>
+          
           </div>
         </div>
       </div>
@@ -78,5 +78,26 @@
     ></script>
 
     <script src="fa/js/all.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <script>
+    @foreach ($pesan as $ps)
+    $("#html-content-holder-{{ $ps->id }}").on('click', function () {
+      html2canvas(document.getElementById("html-content-holder-{{ $ps->id }}")).then(function (canvas) {                   
+          var anchorTag = document.createElement("a");
+          document.body.appendChild(anchorTag);
+          document.getElementById("previewImg").appendChild(canvas);
+          anchorTag.download = "secret_message_{{ $ps->id }}.jpg";
+          anchorTag.href = canvas.toDataURL();
+          anchorTag.target = '_blank';
+          anchorTag.click();
+      });
+    });
+    @endforeach
+    </script>
+    
   </body>
 </html>
