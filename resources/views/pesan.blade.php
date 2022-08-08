@@ -52,9 +52,9 @@
               </div>
             </div>
             @endforeach
-
-          <div id="previewImg" class="d-none"></div>
-          
+            
+            <div id="previewImg" class="d-none"></div>
+            
           </div>
         </div>
       </div>

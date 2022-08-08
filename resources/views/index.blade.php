@@ -34,7 +34,7 @@
               <div class="d-flex align-items-center mx-3 mt-3">
                 <i class="fa-brands fa-instagram rounded-circle"></i>
                 <div class="mx-2">
-                  <p class="my-0">Follow me in instagram</p>
+                  <p class="my-0">Follow me on instagram</p>
                   <p class="my-0" style="font-size: 0.8em">
                     <a href="https://www.instagram.com/salliemansurina/" target="_blank" style="text-decoration: none; color: #293462"
                       ><strong>@salliemansurina</strong></a
@@ -65,7 +65,7 @@
           <div class="text-center">
             <small
               ><i class="fa-solid fa-lock text-warning"></i
-              ><span class="text-light"> secret q&a</span></small
+              ><span class="text-light"> secret q&a © copyright by salliemansurina</span></small
             >
           </div>
           <div class="mt-3 text-center">
