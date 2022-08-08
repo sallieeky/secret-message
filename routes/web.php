@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Data;
 use App\Models\Pesan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -18,8 +19,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/migrate", function () {
-    Artisan::call("migrate:fresh --seed");
+    Artisan::call("migrate");
     return redirect("/");
+});
+
+Route::get("/tes", function () {
+    return view("tes");
 });
 
 Route::get('/', function () {
@@ -45,10 +50,17 @@ Route::get('/pesan', function () {
     return view('pesan', compact("pesan"));
 })->middleware("auth");
 
+Route::get('/data', function () {
+    $data = Data::all();
+    return view('data', compact("data"));
+})->middleware("auth");
+
 Route::post('/send', function (Request $request) {
-    Pesan::create([
+    $pesan = Pesan::create([
         "isi" => $request->isi
     ]);
+    $request["pesan_id"] = $pesan->id;
+    Data::create($request->only("pesan_id", "browser", "os", "platform", "source"));
 
     return back()->with("pesan", "Berhasil mengirim pesan");
 });
